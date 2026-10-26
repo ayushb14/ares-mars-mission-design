@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ares"
+version = "0.4.0"
+description = "ARES Stage 4: validated Earth–Mars Lambert physics with a local FastAPI + React mission-design application."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+authors = [{ name = "ARES contributors" }]
+keywords = ["spice", "ephemeris", "mars", "astrodynamics", "naif"]
+dependencies = [
+    "numpy>=1.26",
+    "spiceypy>=6.0.0",
+    "scipy>=1.11",
+    "lamberthub>=1.0.0,<2",
+    "plotly>=5.18",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "httpx>=0.27",
+]
+plot = [
+    "matplotlib>=3.8",
+]
+
+[project.urls]
+Documentation = "docs/PHYSICS.md"
+
+[project.scripts]
+ares-ephemeris = "ares.ephemeris:main"
+ares-trajectory = "ares.trajectory:main"
+ares-porkchop = "ares.porkchop:main"
+ares-api = "ares.api.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
